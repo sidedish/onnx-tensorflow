@@ -13,7 +13,8 @@ def tf2onnx(dtype):
     tf_dype = dtype
   else:
     raise RuntimeError("dtype should be number or tf.DType.")
-  return mapping.NP_TYPE_TO_TENSOR_TYPE[np.dtype(tf_dype.as_numpy_dtype)]
+  # return mapping.NP_TYPE_TO_TENSOR_TYPE[np.dtype(tf_dype.as_numpy_dtype)]
+  return mapping.NP_TYPE_TO_TENSOR_TYPE[np.dtype(tf_dype.name)]
 
 
 def onnx2tf(dtype):

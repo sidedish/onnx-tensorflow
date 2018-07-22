@@ -33,5 +33,14 @@ class Pad(FrontendHandler):
     consts = kwargs["consts"]
     mode = node.attr.get("mode", "constant")
     pads = np.transpose(consts[node.inputs[1]]).flatten()
+    # # TODO(wwcai): NHWC->NCHW
+    new_pads = pads.copy()
+    new_pads[1] = pads[3]
+    new_pads[2] = pads[1]
+    new_pads[3] = pads[2]
+    new_pads[5] = pads[7]
+    new_pads[6] = pads[5]
+    new_pads[7] = pads[6]
+
     return cls.make_node_from_tf_node(
-        node, [node.inputs[0]], pads=pads, mode=mode, value=0.0)
+        node, [node.inputs[0]], pads=new_pads, mode=mode, value=0.0)
