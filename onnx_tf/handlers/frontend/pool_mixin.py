@@ -31,18 +31,6 @@ class PoolMixin(object):
     pads = ConvMixin.cal_pads(auto_pad, len(spatial_indices), input_shape,
                               output_shape, strides, kernel_shape)
 
-    if node.name == "resnet_v1_50/pool1/MaxPool":
-        pads = [1, 1, 1, 1]
-
-    if node.name == "resnet_v1_50/block1/unit_3/bottleneck_v1/shortcut/MaxPool":
-        pads = [0, 0, 0, 0]
-
-    if node.name == "resnet_v1_50/block2/unit_4/bottleneck_v1/shortcut/MaxPool":
-        pads = [0, 0, 0, 0]
-
-    if node.name == "resnet_v1_50/block3/unit_6/bottleneck_v1/shortcut/MaxPool":
-        pads = [0, 0, 0, 0]
-
     node_kwargs = {}
     if "count_include_pad" in kwargs:
       node_kwargs["count_include_pad"] = kwargs["count_include_pad"]
