@@ -47,6 +47,7 @@ class ConvMixin(object):
       for i in range(spatial_dim):
         pad_shape = (
             output_shape[i] - 1) * strides[i] + kernel_shape[i] - input_shape[i]
+        pad_shape = max(0, pad_shape)
         pads[i] = pad_shape // 2
         pads[i + spatial_dim] = pad_shape - pad_shape // 2
     return pads
